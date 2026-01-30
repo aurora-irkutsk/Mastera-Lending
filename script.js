@@ -2,19 +2,19 @@
 // АНИМАЦИЯ НАБЕГАЮЩИХ ЦИФР
 // ============================================
 
-function animateCounter(element, target, duration = 2500) {
+function animateCounter(element, target, duration = 3000) {
     let start = 0;
     const startTime = performance.now();
     const isPlus = target === 500 || target === 50;
     
-    function easeOutQuad(t) {
-        return t * (2 - t); // Замедление к концу
+    function easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3); // Сильное замедление
     }
     
     function animate(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        const easedProgress = easeOutQuad(progress);
+        const easedProgress = easeOutCubic(progress);
         
         start = Math.floor(easedProgress * target);
         
@@ -28,6 +28,7 @@ function animateCounter(element, target, duration = 2500) {
     
     requestAnimationFrame(animate);
 }
+
 // Наблюдатель для анимации при появлении
 const observerOptions = {
     threshold: 0.3,
