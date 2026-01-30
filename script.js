@@ -2,7 +2,7 @@
 // АНИМАЦИЯ НАБЕГАЮЩИХ ЦИФР
 // ============================================
 
-function animateCounter(element, target, duration = 8000) {
+function animateCounter(element, target, duration = 6000) {
     let start = 0;
     const startTime = performance.now();
     const isPlus = target === 500 || target === 50;
@@ -30,37 +30,42 @@ function animateCounter(element, target, duration = 8000) {
     requestAnimationFrame(animate);
 }
 
-// Наблюдатель для анимации при появлении
+// ============================================
+// НАБЛЮДАТЕЛЬ ДЛЯ МОБИЛЬНЫХ И ДЕСКТОП
+// ============================================
+
+// Улучшенные настройки для мобильных устройств
 const observerOptions = {
-    threshold: 0.3,
-    rootMargin: '0px 0px -50px 0px'
+    threshold: 0.1, // Уменьшаем с 0.3 до 0.1 для мобильных
+    rootMargin: '0px 0px -20px 0px' // Уменьшаем отступ
 };
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            // Анимация появления
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-            
             // Если это stat-number, запускаем анимацию цифр
             if (entry.target.classList.contains('stat-number')) {
-                const text = entry.target.textContent;
+                const text = entry.target.textContent.trim();
                 let targetNumber;
                 
-                if (text.includes('500+')) {
+                // Проверяем содержимое более надёжно
+                if (text === '500+' || text.includes('500')) {
                     targetNumber = 500;
-                } else if (text.includes('50+')) {
+                } else if (text === '50+' || text.includes('50')) {
                     targetNumber = 50;
-                } else if (text.includes('24/7')) {
+                } else if (text === '24/7' || text.includes('24')) {
                     // Для 24/7 не анимируем, оставляем как есть
                     return;
                 }
                 
                 // Запускаем анимацию только один раз
-                if (!entry.target.dataset.animated) {
+                if (!entry.target.dataset.animated && targetNumber) {
                     entry.target.dataset.animated = 'true';
-                    animateCounter(entry.target, targetNumber, 8000);
+                    
+                    // Небольшая задержка для мобильных устройств
+                    setTimeout(() => {
+                        animateCounter(entry.target, targetNumber, 6000);
+                    }, 100);
                 }
             }
         }
@@ -89,8 +94,47 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Наблюдаем за статистикой для анимации цифр
-    document.querySelectorAll('.stat-number').forEach(stat => {
-        observer.observe(stat);
-    });
+    // Небольшая задержка для корректной работы на мобильных
+    setTimeout(() => {
+        // Наблюдаем за статистикой для анимации цифр
+        document.querySelectorAll('.stat-number').forEach(stat => {
+            observer.observe(stat);
+            
+            // Debug для проверки (можно удалить после тестирования)
+            console.log('Наблюдаем за:', stat.textContent);
+        });
+    }, 300);
+});
+
+// ============================================
+// ДОПОЛНИТЕЛЬНАЯ ПРОВЕРКА ДЛЯ iOS
+// ============================================
+
+// На iOS иногда нужен дополнительный триггер
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        // Принудительно проверяем видимость элементов
+        document.querySelectorAll('.stat-number').forEach(stat => {
+            const rect = stat.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            
+            if (isVisible && !stat.dataset.animated) {
+                const text = stat.textContent.trim();
+                let targetNumber;
+                
+                if (text === '500+' || text.includes('500')) {
+                    targetNumber = 500;
+                } else if (text === '50+' || text.includes('50')) {
+                    targetNumber = 50;
+                }
+                
+                if (targetNumber) {
+                    stat.dataset.animated = 'true';
+                    setTimeout(() => {
+                        animateCounter(stat, targetNumber, 6000);
+                    }, 100);
+                }
+            }
+        });
+    }, 500);
 });
