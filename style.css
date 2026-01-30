@@ -488,10 +488,30 @@ footer {
     }
     
     .cta-button {
-        max-width: 100%;
-        padding: 1rem 1rem;
-        font-size: 1rem;
-    }
+    /* Запрещаем перенос текста на вторую строку */
+    white-space: nowrap;
+    
+    /* Адаптивный размер шрифта: 
+       минимум 13px, среднее 4.5% от ширины экрана, максимум 18px */
+    font-size: clamp(13px, 4.5vw, 18px);
+    
+    /* Уменьшаем боковые отступы, чтобы текст влез на маленьких экранах */
+    padding: 0.8rem 1.2rem;
+    
+    /* Чтобы padding не вылезал за экран */
+    box-sizing: border-box;
+    
+    /* Максимальная ширина с небольшим запасом */
+    max-width: 95%;
+    width: auto;
+    
+    /* Центрируем, если кнопка блочная */
+    display: inline-block;
+    text-align: center;
+    
+    /* Перенос стрелки не отрывать от текста */
+    word-break: keep-all;
+}
     
     .footer-cta {
         padding: 3rem 4%;
@@ -531,3 +551,11 @@ footer {
     }
 }
 
+/* Для очень маленьких телефонов (iPhone SE и т.д.) */
+@media (max-width: 360px) {
+    .cta-button {
+        font-size: 12px;
+        padding: 0.7rem 1rem;
+        letter-spacing: 0.5px; /* чуть сжимаем */
+    }
+}
