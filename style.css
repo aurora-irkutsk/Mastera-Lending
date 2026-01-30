@@ -413,6 +413,38 @@ footer {
     }
 }
 
+/* ============================================
+   RESPONSIVE - ПЛАНШЕТЫ (768px - 1024px)
+   ============================================ */
+@media (max-width: 1024px) and (min-width: 769px) {
+    header {
+        padding: 1.5rem 4%;
+    }
+    
+    .hero {
+        padding: 3rem 4% 4rem;
+    }
+    
+    .sections-container {
+        padding: 0 4% 3rem;
+    }
+    
+    .split-sections {
+        gap: 1.5rem;
+    }
+    
+    .section-card {
+        padding: 2.5rem;
+    }
+    
+    .footer-cta {
+        padding: 4rem 4%;
+    }
+}
+
+/* ============================================
+   RESPONSIVE - ПЛАНШЕТЫ ВЕРТИКАЛЬНЫЕ (481px - 768px)
+   ============================================ */
 @media (max-width: 768px) {
     header {
         padding: 1.2rem 4%;
