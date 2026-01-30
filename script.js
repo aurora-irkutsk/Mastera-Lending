@@ -60,7 +60,7 @@ const observer = new IntersectionObserver((entries) => {
                 // Запускаем анимацию только один раз
                 if (!entry.target.dataset.animated) {
                     entry.target.dataset.animated = 'true';
-                    animateCounter(entry.target, targetNumber, 6000);
+                    animateCounter(entry.target, targetNumber, 8000);
                 }
             }
         }
