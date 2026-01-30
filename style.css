@@ -413,6 +413,105 @@ footer {
     }
 }
 
+@media (max-width: 768px) {
+    header {
+        padding: 1.2rem 4%;
+    }
+    
+    .logo {
+        font-size: 2rem;
+        letter-spacing: 2px;
+    }
+    
+    .subtitle {
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+    }
+    
+    .hero {
+        padding: 2.5rem 4% 3rem;
+    }
+    
+    .hero-title {
+        font-size: 1.8rem;
+        line-height: 1.4;
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero-title .highlight {
+        font-size: 2.5rem;
+        margin-top: 0.3rem;
+    }
+    
+    .stats {
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+    
+    .stat-item {
+        min-width: 80px;
+        flex: 1 1 calc(33.333% - 1rem);
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+    }
+    
+    .stat-label {
+        font-size: 0.75rem;
+    }
+    
+    /* ОДНА КОЛОНКА ДЛЯ КАРТОЧЕК НА ПЛАНШЕТАХ */
+    .split-sections {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        max-width: 600px;
+        margin: 0 auto 2rem;
+    }
+    
+    .section-card {
+        padding: 2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .section-description {
+        font-size: 1rem;
+    }
+    
+    .benefits-list li {
+        font-size: 0.9rem;
+        padding: 0.6rem 0;
+        padding-left: 1.5rem;
+    }
+    
+    .cta-button {
+        max-width: 100%;
+        padding: 1rem 2.5rem;
+        font-size: 1rem;
+    }
+    
+    .footer-cta {
+        padding: 3rem 4%;
+    }
+    
+    .footer-cta-title {
+        font-size: 2.5rem;
+    }
+    
+    .footer-cta-text {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    footer {
+        padding: 1.5rem 4%;
+    }
+}
+
+
 @media (max-width: 640px) {
     .hero-title {
         font-size: 2rem;
@@ -431,3 +530,4 @@ footer {
         font-size: 2.5rem;
     }
 }
+
