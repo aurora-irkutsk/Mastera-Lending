@@ -73,21 +73,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ============================================
-// КНОПКА ПРОКРУТКИ НАВЕРХ
-// ============================================
-
-const scrollBtn = document.createElement('button');
-scrollBtn.textContent = '▲';
-scrollBtn.className = 'scroll-top';
-scrollBtn.setAttribute('aria-label', 'Прокрутить наверх');
-scrollBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-document.body.appendChild(scrollBtn);
-
-window.addEventListener('scroll', () => {
-    scrollBtn.style.display = window.scrollY > 400 ? 'block' : 'none';
-});
-
-// ============================================
 // ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ СТРАНИЦЫ
 // ============================================
 
