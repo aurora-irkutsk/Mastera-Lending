@@ -12,17 +12,64 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Анимация появления элементов при скролле
+// Анимация набегающих цифр
+function animateCounter(element, target, duration = 2000) {
+    let start = 0;
+    const increment = target / (duration / 16); // 60 FPS
+    const isPlus = target === 500 || target === 50; // Для 500+ и 50+
+    const targetNumber = isPlus ? target : target;
+    
+    const timer = setInterval(() => {
+        start += increment;
+        if (start >= targetNumber) {
+            element.textContent = isPlus ? `${targetNumber}+` : target;
+            clearInterval(timer);
+        } else {
+            element.textContent = isPlus ? `${Math.floor(start)}+` : Math.floor(start);
+        }
+    }, 16);
+}
+
+// Наблюдатель для анимации при появлении
 const observerOptions = {
-    threshold: 0.1,
+    threshold: 0.3,
     rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
+            // Анимация появления
             entry.target.style.opacity = '1';
             entry.target.style.transform = 'translateY(0)';
+            
+            // Если это stat-number, запускаем анимацию цифр
+            if (entry.target.classList.contains('stat-number')) {
+                const text = entry.target.textContent;
+                let targetNumber;
+                
+                if (text.includes('500+')) {
+                    targetNumber = 500;
+                } else if (text.includes('50+')) {
+                    targetNumber = 50;
+                } else if (text.includes('24/7')) {
+                    // Для 24/7 не анимируем, оставляем как есть
+                    return;
+                }
+                
+                // Запускаем анимацию только один раз
+                if (!entry.target.dataset.animated) {
+                    entry.target.dataset.animated = 'true';
+                    animateCounter(entry.target, targetNumber, 2000);
+                }
+            }
         }
     });
 }, observerOptions);
+
+// Наблюдаем за статистикой
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.stat-number').forEach(stat => {
+        observer.observe(stat);
+    });
+});
