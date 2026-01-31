@@ -93,7 +93,7 @@ header {
 }
 
 .logo {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 2.2rem;
     font-weight: 900;
     letter-spacing: 3px;
@@ -128,7 +128,7 @@ header {
 
 .hero h1,
 .hero-title {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: clamp(2rem, 4.1vw, 6rem);
     line-height: 1.2;
     margin-bottom: 1.5rem;
@@ -171,7 +171,7 @@ header {
 }
 
 .stat-number {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 3.5rem;
     color: var(--construction-orange);
     line-height: 1;
@@ -247,7 +247,7 @@ header {
 }
 
 .section-title {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: clamp(1rem, 2vw, 3rem);
     font-weight: 700;
     margin-bottom: 1rem;
@@ -382,7 +382,7 @@ header {
 }
 
 .footer-cta-title {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: clamp(2rem, 3vw, 5rem);
     font-weight: 900;
     margin-bottom: 2rem;
@@ -688,7 +688,7 @@ footer {
     }
 
     .hero-subtitle .highlight {
-    font-size: clamp(0.9rem, 2.2vw, 3rem);
+    font-size: clamp(1rem, 2.2vw, 3rem);
     color: var(--construction-yellow);
     font-weight: 600;
     display: block;
@@ -709,7 +709,7 @@ footer {
     }
 
     .footer-cta-title {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: clamp(2rem, 3vw, 5rem);
     font-weight: 900;
     margin-bottom: 2rem;
