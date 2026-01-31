@@ -663,6 +663,7 @@ footer {
 @media (max-width: 640px) {
     .hero h1,
     .hero-title {
+        font-family: 'Montserrat', sans-serif;
         font-size: clamp(2rem, 3.5vw, 5rem);
     }
 
@@ -688,7 +689,7 @@ footer {
     }
 
     .hero-subtitle .highlight {
-    font-size: clamp(1rem, 2.2vw, 3rem);
+    font-size: clamp(1.1rem, 2.2vw, 3rem);
     color: var(--construction-yellow);
     font-weight: 600;
     display: block;
