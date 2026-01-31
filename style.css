@@ -664,13 +664,13 @@ footer {
     .hero h1,
     .hero-title {
         font-family: 'Montserrat', sans-serif;
-        font-size: clamp(1.8rem, 3.5vw, 5rem);
+        font-size: clamp(1.8rem, 3vw, 5rem);
         font-weight: 900;
     }
 
     .logo {
     font-family: 'Montserrat', sans-serif;
-    font-size: clamp(1.6rem, 3.5vw, 5rem);
+    font-size: clamp(1.6rem, 3vw, 5rem);
     font-weight: 900;
     letter-spacing: 3px;
     background: linear-gradient(135deg, var(--construction-yellow), var(--construction-orange));
@@ -685,7 +685,7 @@ footer {
     .subtitle {
     font-family: 'Montserrat', sans-serif;
     color: var(--safety-green);
-    font-size: clamp(0.8rem, 1.5vw, 2rem);
+    font-size: clamp(0.8rem, 1.4vw, 2rem);
     font-weight: 500;
     margin-top: 0.5rem;
     letter-spacing: 2px;
@@ -694,7 +694,7 @@ footer {
 
     .hero-subtitle {
     font-family: 'Montserrat', sans-serif;
-    font-size: clamp(1rem, 2.5vw, 4rem);
+    font-size: clamp(1rem, 2.2vw, 4rem);
     font-weight: 600;
     max-width: 700px;
     margin: 0 auto 3rem;
@@ -704,7 +704,7 @@ footer {
     }
 
     .hero-subtitle .highlight {
-    font-size: clamp(1rem, 2.5vw, 3rem);
+    font-size: clamp(1rem, 2.2vw, 3rem);
     color: var(--construction-yellow);
     font-weight: 600;
     display: block;
