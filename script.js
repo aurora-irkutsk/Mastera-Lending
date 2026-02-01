@@ -41,9 +41,9 @@ function prepareStatsForAnimation() {
         stat.dataset.originalValue = text;
         
         // ВАЖНО: Проверяем ТОЧНОЕ совпадение, а не includes!
-        // Сначала проверяем более длинные числа (1200), потом короткие (200)
+        // Сначала проверяем более длинные числа (1290), потом короткие (200)
         
-        if (text === '1200+' || text === '1290') {
+        if (text === '1290+' || text === '1290') {
             stat.dataset.target = '1290';
             stat.dataset.suffix = '+';
             stat.textContent = '0+';
@@ -100,7 +100,7 @@ const observer = new IntersectionObserver((entries) => {
                 
                 if (target === '1290') {
                     setTimeout(() => {
-                        animateCounter(entry.target, 1200, 2500, suffix);
+                        animateCounter(entry.target, 1290, 2500, suffix);
                     }, 100);
                     
                 } else if (target === '200') {
