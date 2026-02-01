@@ -2,7 +2,7 @@
 // АНИМАЦИЯ НАБЕГАЮЩИХ ЦИФР
 // ============================================
 
-function animateCounterVariant2(element, target, duration = 4500, suffix = '') {
+function animateCounter(element, target, duration = 4500, suffix = '') {
     let start = 0;
     const startTime = performance.now();
     
