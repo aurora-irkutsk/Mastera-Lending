@@ -2,19 +2,19 @@
 // АНИМАЦИЯ НАБЕГАЮЩИХ ЦИФР
 // ============================================
 
-function animateCounter(element, target, duration = 4500, suffix = '') {
+function animateCounterVariant2(element, target, duration = 4500, suffix = '') {
     let start = 0;
     const startTime = performance.now();
     
-    // Функция плавного замедления к концу
-    function easeOutQuad(t) {
-        return t * (2 - t);
+    // Сильное замедление (ease-out-cubic)
+    function easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
     }
     
     function animate(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        const easedProgress = easeOutQuad(progress);
+        const easedProgress = easeOutCubic(progress);
         
         start = Math.floor(easedProgress * target);
         
