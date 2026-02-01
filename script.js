@@ -2,7 +2,7 @@
 // АНИМАЦИЯ НАБЕГАЮЩИХ ЦИФР
 // ============================================
 
-function animateCounter(element, target, duration = 2000, suffix = '') {
+function animateCounter(element, target, duration = 4500, suffix = '') {
     let start = 0;
     const startTime = performance.now();
     
@@ -40,27 +40,26 @@ function prepareStatsForAnimation() {
         // Сохраняем оригинальное значение
         stat.dataset.originalValue = text;
         
-        // Определяем целевое число и суффикс
-        if (text.includes('500') || text === '500+') {
-            stat.dataset.target = '500';
+        // ВАЖНО: Проверяем ТОЧНОЕ совпадение, а не includes!
+        // Сначала проверяем более длинные числа (1200), потом короткие (200)
+        
+        if (text === '1200+' || text === '1200') {
+            stat.dataset.target = '1200';
             stat.dataset.suffix = '+';
-            stat.textContent = '0+'; // Начинаем с 0
+            stat.textContent = '0+';
+            console.log('✅ Найдено 1200+, подготовлено к анимации');
             
-        } else if (text.includes('2000') || text === '2000+') {
-            stat.dataset.target = '2000';
+        } else if (text === '200+' || text === '200') {
+            stat.dataset.target = '200';
             stat.dataset.suffix = '+';
-            stat.textContent = '0+'; // Начинаем с 0
+            stat.textContent = '0+';
+            console.log('✅ Найдено 200+, подготовлено к анимации');
             
-        } else if (text.includes('15')) {
-            stat.dataset.target = '15';
+        } else if (text === '30 мин' || text.startsWith('30')) {
+            stat.dataset.target = '30';
             stat.dataset.suffix = ' мин';
-            stat.textContent = '0 мин'; // Начинаем с 0
-            
-        } else if (text.includes('4.8') || text.includes('★')) {
-            stat.dataset.target = 'rating';
-            // Для рейтинга просто скрываем
-            stat.style.opacity = '0';
-            stat.style.transform = 'scale(0.8)';
+            stat.textContent = '0 мин';
+            console.log('✅ Найдено 30 мин, подготовлено к анимации');
         }
     });
 }
@@ -73,7 +72,6 @@ function animateIcons() {
     const icons = document.querySelectorAll('.section-icon');
     
     icons.forEach((icon, index) => {
-        // Добавляем задержку для каждой иконки
         setTimeout(() => {
             icon.style.animation = 'bounce 2s ease-in-out infinite';
         }, index * 200);
@@ -94,37 +92,29 @@ const observer = new IntersectionObserver((entries) => {
         if (entry.isIntersecting && !entry.target.dataset.animated) {
             entry.target.dataset.animated = 'true';
             
-            // Если это stat-number - запускаем анимацию цифр
             if (entry.target.classList.contains('stat-number')) {
                 const target = entry.target.dataset.target;
                 const suffix = entry.target.dataset.suffix || '';
                 
-                if (target === '500') {
+                console.log(`🎬 Запускаю анимацию для: ${target}${suffix}`);
+                
+                if (target === '1200') {
                     setTimeout(() => {
-                        animateCounter(entry.target, 500, 2000, suffix);
+                        animateCounter(entry.target, 1200, 2500, suffix);
                     }, 100);
                     
-                } else if (target === '2000') {
+                } else if (target === '200') {
                     setTimeout(() => {
-                        animateCounter(entry.target, 2000, 2500, suffix);
+                        animateCounter(entry.target, 200, 1500, suffix);
                     }, 100);
                     
-                } else if (target === '15') {
+                } else if (target === '30') {
                     setTimeout(() => {
-                        animateCounter(entry.target, 15, 1500, suffix);
+                        animateCounter(entry.target, 30, 1300, suffix);
                     }, 100);
-                    
-                } else if (target === 'rating') {
-                    // Для рейтинга - плавное появление
-                    setTimeout(() => {
-                        entry.target.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'scale(1)';
-                    }, 300);
                 }
             }
             
-            // Если это section-card - добавляем анимацию появления
             if (entry.target.classList.contains('section-card')) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
@@ -141,7 +131,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
         
-        // Игнорируем пустые якори
         if (href === '#' || href === '#!') {
             return;
         }
@@ -177,8 +166,12 @@ document.querySelectorAll('.cta-button').forEach(button => {
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    // ВАЖНО: Сначала подготавливаем элементы (заменяем цифры на 0)
+    console.log('🔍 DOM загружен, подготавливаем статистику...');
+    
+    // ВАЖНО: Сначала подготавливаем элементы
     prepareStatsForAnimation();
+    
+    console.log('✅ Статистика подготовлена к анимации');
     
     // Запускаем анимацию иконок
     setTimeout(() => {
@@ -191,7 +184,6 @@ document.addEventListener('DOMContentLoaded', () => {
             observer.observe(stat);
         });
         
-        // Наблюдаем за карточками
         document.querySelectorAll('.section-card').forEach(card => {
             observer.observe(card);
         });
@@ -210,14 +202,15 @@ document.addEventListener('DOMContentLoaded', () => {
 // ============================================
 
 window.addEventListener('load', () => {
-    // Проверяем, подготовлены ли элементы
+    console.log('📱 Страница загружена, проверяем элементы...');
+    
     const firstStat = document.querySelector('.stat-number');
     if (firstStat && !firstStat.dataset.target) {
+        console.log('⚠️ Элементы не подготовлены, подготавливаем сейчас...');
         prepareStatsForAnimation();
     }
     
     setTimeout(() => {
-        // Принудительно проверяем видимость элементов
         document.querySelectorAll('.stat-number').forEach(stat => {
             const rect = stat.getBoundingClientRect();
             const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
@@ -227,32 +220,26 @@ window.addEventListener('load', () => {
                 const suffix = stat.dataset.suffix || '';
                 stat.dataset.animated = 'true';
                 
-                if (target === '500') {
+                console.log(`🎬 Принудительный запуск анимации для: ${target}${suffix}`);
+                
+                if (target === '1200') {
                     setTimeout(() => {
-                        animateCounter(stat, 500, 2000, suffix);
+                        animateCounter(stat, 1200, 2500, suffix);
                     }, 100);
                     
-                } else if (target === '2000') {
+                } else if (target === '200') {
                     setTimeout(() => {
-                        animateCounter(stat, 2000, 2500, suffix);
+                        animateCounter(stat, 200, 1500, suffix);
                     }, 100);
                     
-                } else if (target === '15') {
+                } else if (target === '30') {
                     setTimeout(() => {
-                        animateCounter(stat, 15, 1500, suffix);
+                        animateCounter(stat, 30, 1300, suffix);
                     }, 100);
-                    
-                } else if (target === 'rating') {
-                    setTimeout(() => {
-                        stat.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-                        stat.style.opacity = '1';
-                        stat.style.transform = 'scale(1)';
-                    }, 300);
                 }
             }
         });
         
-        // Проверяем карточки
         document.querySelectorAll('.section-card').forEach(card => {
             const rect = card.getBoundingClientRect();
             const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
@@ -275,7 +262,6 @@ document.querySelectorAll('.cta-button').forEach(button => {
         const buttonText = this.querySelector('.cta-main')?.textContent || 'unknown';
         console.log('Клик по кнопке:', buttonText);
         
-        // Дополнительная аналитика (опционально)
         if (typeof ym !== 'undefined') {
             if (this.classList.contains('cta-masters')) {
                 ym(106537206, 'reachGoal', 'click_masters');
@@ -297,7 +283,6 @@ let lastScrollTop = 0;
 window.addEventListener('scroll', () => {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
-    // Анимация для элементов при скролле вниз
     if (scrollTop > lastScrollTop) {
         document.querySelectorAll('.stat-item, .section-card').forEach(element => {
             const rect = element.getBoundingClientRect();
@@ -315,4 +300,4 @@ window.addEventListener('scroll', () => {
     lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
 }, false);
 
-console.log('🚀 JavaScript загружен! Анимация цифр активирована.');
+console.log('🚀 JavaScript загружен! Ищем: 200+, 1200+, 30 мин');
