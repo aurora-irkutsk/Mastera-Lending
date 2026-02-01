@@ -6,15 +6,15 @@ function animateCounter(element, target, duration = 4500, suffix = '') {
     let start = 0;
     const startTime = performance.now();
     
-    // Сильное замедление (ease-out-cubic)
-    function easeOutCubic(t) {
-        return 1 - Math.pow(1 - t, 3);
+    // Экстремальное замедление (ease-out-quint)
+    function easeOutQuint(t) {
+        return 1 - Math.pow(1 - t, 5);
     }
     
     function animate(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / duration, 1);
-        const easedProgress = easeOutCubic(progress);
+        const easedProgress = easeOutQuint(progress);
         
         start = Math.floor(easedProgress * target);
         
