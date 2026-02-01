@@ -2,13 +2,13 @@
 // АНИМАЦИЯ НАБЕГАЮЩИХ ЦИФР
 // ============================================
 
-function animateCounter(element, target, duration = 4500, suffix = '') {
+function animateCounter(element, target, duration = 6000, suffix = '') {
     let start = 0;
     const startTime = performance.now();
     
     // Экстремальное замедление (ease-out-quint)
     function easeOutQuint(t) {
-        return 1 - Math.pow(1 - t, 5);
+        return 1 - Math.pow(1 - t, 7);
     }
     
     function animate(currentTime) {
