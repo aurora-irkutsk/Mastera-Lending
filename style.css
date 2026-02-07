@@ -842,7 +842,7 @@ footer {
     
     /* Постоянная подсветка карточек на мобильных */
     .section-card:first-child {
-        border: 2px solid var(--safety-green);
+        border: 0.5px solid var(--safety-green);
         box-shadow:
             0 10px 30px rgba(0, 0, 0, 0.5),
             0 0 40px rgba(6, 255, 165, 0.3),
@@ -850,7 +850,7 @@ footer {
     }
     
     .section-card:last-child {
-        border: 2px solid var(--construction-yellow);
+        border: 0.5px solid var(--construction-yellow);
         box-shadow:
             0 10px 30px rgba(0, 0, 0, 0.5),
             0 0 40px rgba(253, 185, 19, 0.3),
