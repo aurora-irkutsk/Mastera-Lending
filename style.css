@@ -362,11 +362,12 @@ header {
     border-radius: 8px;
     position: relative;
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
     animation: scaleIn 0.6s ease-out backwards;
     display: flex;
     flex-direction: column;
     min-height: 700px;
+    border: 2px solid transparent;
 }
 
 .section-card:nth-child(1) {
@@ -837,6 +838,23 @@ footer {
     .online-indicator {
         width: 10px;
         height: 10px;
+    }
+    
+    /* Постоянная подсветка карточек на мобильных */
+    .section-card:first-child {
+        border: 3px solid var(--safety-green);
+        box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.5),
+            0 0 40px rgba(6, 255, 165, 0.3),
+            inset 0 1px 0 rgba(6, 255, 165, 0.2);
+    }
+    
+    .section-card:last-child {
+        border: 3px solid var(--construction-yellow);
+        box-shadow:
+            0 10px 30px rgba(0, 0, 0, 0.5),
+            0 0 40px rgba(253, 185, 19, 0.3),
+            inset 0 1px 0 rgba(253, 185, 19, 0.2);
     }
     
     .logo-image {
