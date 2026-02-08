@@ -192,29 +192,39 @@ function initOnlineCounter() {
     const counterElement = document.querySelector('.online-count');
     if (!counterElement) return;
 
-    const baseCount = parseInt(counterElement.dataset.base, 10) || 87;
-    const minFluctuation = -5; // Минимальное отклонение
-    const maxFluctuation = 8;  // Максимальное отклонение
+    const minCount = 3;   // Минимальное количество мастеров
+    const maxCount = 58;  // Максимальное количество мастеров
+    
+    // Генерируем случайное начальное значение при каждой загрузке страницы (от 1 до 12)
+    const initialCount = Math.floor(Math.random() * 12) + 1;
+    counterElement.textContent = initialCount;
+    let currentCount = initialCount;
     
     // Функция обновления счетчика
     function updateCounter() {
-        // Генерируем случайное изменение
-        const fluctuation = Math.floor(Math.random() * (maxFluctuation - minFluctuation + 1)) + minFluctuation;
-        const newCount = Math.max(baseCount + fluctuation, 50); // Минимум 50 мастеров
+        // Генерируем небольшое изменение от текущего значения (от -8 до +8)
+        const minChange = -8;
+        const maxChange = 8;
+        const change = Math.floor(Math.random() * (maxChange - minChange + 1)) + minChange;
+        
+        // Применяем изменение, но остаёмся в пределах от 3 до 58
+        let targetCount = currentCount + change;
+        targetCount = Math.max(minCount, Math.min(maxCount, targetCount));
         
         // Добавляем визуальный эффект
         counterElement.classList.add('updating');
         
-        // Обновляем число
+        // Мгновенная смена числа (без анимации набегания)
         setTimeout(() => {
-            counterElement.textContent = newCount;
+            counterElement.textContent = targetCount;
             counterElement.classList.remove('updating');
+            currentCount = targetCount;
         }, 150);
     }
     
-    // Обновляем каждые 8-15 секунд
+    // Обновляем каждые 12-20 секунд
     function scheduleNextUpdate() {
-        const delay = Math.random() * 7000 + 8000; // 8-15 секунд
+        const delay = Math.random() * 8000 + 12000; // 12-20 секунд
         setTimeout(() => {
             updateCounter();
             scheduleNextUpdate();
