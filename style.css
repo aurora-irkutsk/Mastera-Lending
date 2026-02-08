@@ -219,13 +219,33 @@ header {
 }
 
 .online-indicator {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     background: var(--safety-green);
     border-radius: 50%;
     box-shadow: 0 0 10px var(--safety-green), 0 0 20px var(--safety-green);
     animation: pulse-online 1.5s ease-in-out infinite;
     transition: opacity 0.6s ease, box-shadow 0.6s ease;
+    position: relative;
+}
+
+.online-indicator::before,
+.online-indicator::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid var(--safety-green);
+    opacity: 0;
+    animation: ripple 3.5s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.online-indicator::after {
+    animation-delay: 1.75s;
 }
 
 .online-text {
@@ -257,6 +277,17 @@ header {
         opacity: 0.6;
         transform: scale(1);
         box-shadow: 0 0 8px var(--safety-green), 0 0 15px var(--safety-green);
+    }
+}
+
+@keyframes ripple {
+    0% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(3.5);
     }
 }
 
