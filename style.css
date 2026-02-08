@@ -500,8 +500,11 @@ header {
     content: '✓';
     position: absolute;
     left: 0;
+    top: 50%;
+    transform: translateY(-50%);
     color: var(--construction-orange);
     font-size: 1.5rem;
+    line-height: 1;
 }
 
 .benefits-list li strong {
